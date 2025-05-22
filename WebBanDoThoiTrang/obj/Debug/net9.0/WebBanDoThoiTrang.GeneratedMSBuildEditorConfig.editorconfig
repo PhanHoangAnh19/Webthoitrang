@@ -17,65 +17,93 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebBanDoThoiTrang
 build_property.RootNamespace = WebBanDoThoiTrang
-build_property.ProjectDir = F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang\WebBanDoThoiTrang\
+build_property.ProjectDir = F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang\WebBanDoThoiTrang
+build_property.MSBuildProjectDirectory = F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Account/ChangePassWord.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Account/ChangePassWord.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzV29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Account/Login.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Account/Register.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Account/VerifyEmail.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Account/VerifyEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxWZXJpZnlFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Home/Index.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/BLOG.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCTE9HLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/CUAHANG.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDVUFIQU5HLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/DIPVASUKIEN.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxESVBWQVNVS0lFTi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Home/Privacy.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/INNEW.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJTk5FVy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/LOOKBOOK.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMT09LQk9PSy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Shared/Error.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/SANPHAM.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTQU5QSEFNLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Shared/_AccountLayout.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/_AccountLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BY2NvdW50TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Shared/_LoginPartial.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Shared/_ValidationScriptsPartial.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/_ViewImports.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/ThoiTrang/ThoiTrangHome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGhvaVRyYW5nXFRob2lUcmFuZ0hvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/_ViewStart.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang/WebBanDoThoiTrang/Views/Shared/_Layout.cshtml]
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-0udh6p74ia

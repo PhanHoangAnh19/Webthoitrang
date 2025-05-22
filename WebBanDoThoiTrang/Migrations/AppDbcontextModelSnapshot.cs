@@ -22,6 +22,21 @@ namespace WebBanDoThoiTrang.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ChiTietDonHangDonHang", b =>
+                {
+                    b.Property<int>("ChiTietDonHangsMaKhachHang")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DonHangsMaDonHang")
+                        .HasColumnType("int");
+
+                    b.HasKey("ChiTietDonHangsMaKhachHang", "DonHangsMaDonHang");
+
+                    b.HasIndex("DonHangsMaDonHang");
+
+                    b.ToTable("ChiTietDonHangDonHang");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -155,6 +170,134 @@ namespace WebBanDoThoiTrang.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.ChiTietDonHang", b =>
+                {
+                    b.Property<int>("MaKhachHang")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaKhachHang"));
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("DienThoai")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("SanPhamMaSanPham")
+                        .HasColumnType("int");
+
+                    b.HasKey("MaKhachHang");
+
+                    b.HasIndex("SanPhamMaSanPham");
+
+                    b.ToTable("ChiTietDonHangs");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.DonHang", b =>
+                {
+                    b.Property<int>("MaDonHang")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDonHang"));
+
+                    b.Property<int>("MaKhachHang")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NgayDatHang")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TongTien")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("MaDonHang");
+
+                    b.HasIndex("MaKhachHang");
+
+                    b.ToTable("DonHangs");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.KhachHang", b =>
+                {
+                    b.Property<int>("MaKhachHang")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaKhachHang"));
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("DienThoai")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("MaKhachHang");
+
+                    b.ToTable("KhachHangs");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.SanPham", b =>
+                {
+                    b.Property<int>("MaSanPham")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaSanPham"));
+
+                    b.Property<decimal>("DonGia")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("HinhAnh")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("MoTa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SoLuongTon")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenSanPham")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("MaSanPham");
+
+                    b.ToTable("SanPhams");
+                });
+
             modelBuilder.Entity("WebBanDoThoiTrang.Models.Users", b =>
                 {
                     b.Property<string>("Id")
@@ -224,6 +367,21 @@ namespace WebBanDoThoiTrang.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ChiTietDonHangDonHang", b =>
+                {
+                    b.HasOne("WebBanDoThoiTrang.Models.ChiTietDonHang", null)
+                        .WithMany()
+                        .HasForeignKey("ChiTietDonHangsMaKhachHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebBanDoThoiTrang.Models.DonHang", null)
+                        .WithMany()
+                        .HasForeignKey("DonHangsMaDonHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -273,6 +431,34 @@ namespace WebBanDoThoiTrang.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.ChiTietDonHang", b =>
+                {
+                    b.HasOne("WebBanDoThoiTrang.Models.SanPham", null)
+                        .WithMany("ChiTietDonHangs")
+                        .HasForeignKey("SanPhamMaSanPham");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.DonHang", b =>
+                {
+                    b.HasOne("WebBanDoThoiTrang.Models.KhachHang", "KhachHang")
+                        .WithMany("DonHangs")
+                        .HasForeignKey("MaKhachHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KhachHang");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.KhachHang", b =>
+                {
+                    b.Navigation("DonHangs");
+                });
+
+            modelBuilder.Entity("WebBanDoThoiTrang.Models.SanPham", b =>
+                {
+                    b.Navigation("ChiTietDonHangs");
                 });
 #pragma warning restore 612, 618
         }

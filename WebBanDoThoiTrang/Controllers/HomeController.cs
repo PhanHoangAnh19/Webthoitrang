@@ -18,6 +18,30 @@ namespace WebBanDoThoiTrang.Controllers
             return View();
         }
 
+        public IActionResult INNEW()
+        {
+            return View();
+        }
+        public IActionResult SANPHAM()
+        {
+            return View();
+        }
+        public IActionResult LOOKBOOK()
+        {
+            return View();
+        }
+        public IActionResult DIPVASUKIEN()
+        {
+            return View();
+        }
+        public IActionResult BLOG()
+        {
+            return View();
+        }
+        public IActionResult CUAHANG()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
