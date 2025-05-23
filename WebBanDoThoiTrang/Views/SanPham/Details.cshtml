@@ -1,45 +1,35 @@
 ﻿@model WebBanDoThoiTrang.Models.SanPham
 @{
-    ViewData["Title"] = "Chi tiết sản phẩm";
+    ViewData["Title"] = Model.TenSanPham;
     Layout = "_Layout";
 }
 
 <div class="container py-5">
-    <div class="row gx-5 align-items-start">
-        <!-- Cột 1: ảnh sản phẩm -->
-        <div class="col-12 col-md-6 text-center mb-4 mb-md-0">
-            <img src="@Url.Content(Model.HinhAnh)"
-                 alt="@Model.TenSanPham"
-                 class="img-fluid rounded" />
+    <div class="row g-4">
+        <div class="col-md-6">
+            <img src="@Model.HinhAnh" alt="@Model.TenSanPham" class="img-fluid rounded" />
         </div>
+        <div class="col-md-6">
+            <h2 class="mb-3">@Model.TenSanPham</h2>
+            <p class="mb-4">@Model.MoTa</p>
 
-        <!-- Cột 2: thông tin sản phẩm -->
-        <div class="col-12 col-md-6">
-            <h1 class="display-5 fw-bold mb-4">@Model.TenSanPham</h1>
-
-            <!-- Giá mới và giá cũ -->
             <div class="mb-4">
-                <span class="fs-3 text-danger fw-semibold">
+                <span class="text-muted text-decoration-line-through me-2">
+                    @Model.GiaCu?.ToString("N0")₫
+                </span>
+                <span class="fs-4 fw-bold text-danger">
                     @Model.DonGia.ToString("N0")₫
                 </span>
-                @if (Model.GiaCu.HasValue)
-                {
-                    <span class="text-muted text-decoration-line-through ms-3">
-                        @Model.GiaCu.Value.ToString("N0")₫
-                    </span>
-                }
             </div>
 
-            <!-- Mô tả -->
-            <div class="mb-4">
-                <h2 class="h5 fw-semibold">Mô tả sản phẩm</h2>
-                <p>@Model.MoTa</p>
-            </div>
-
-            <!-- Nút thêm giỏ hàng -->
-            <button class="btn btn-primary btn-lg">
-                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
-            </button>
+            <form asp-controller="GioHang"
+                  asp-action="ThemVaoGioHang"
+                  asp-route-id="@Model.MaSanPham"
+                  method="post">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-cart-plus me-1"></i> Thêm vào giỏ
+                </button>
+            </form>
         </div>
     </div>
 </div>

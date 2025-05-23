@@ -14,7 +14,7 @@ builder.Services.AddDbContext<AppDbcontext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Configuration.GetConnectionString("Default");
-// first code 
+ 
 builder.Services.AddIdentity<Users, IdentityRole>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -28,11 +28,20 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 }) 
     .AddEntityFrameworkStores<AppDbcontext>()
     .AddDefaultTokenProviders();
-    
+// add session store
+builder.Services.AddDistributedMemoryCache();
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -42,7 +51,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -1,0 +1,62 @@
+﻿@model List<WebBanDoThoiTrang.Models.GioHang>
+@{
+    ViewData["Title"] = "Giỏ hàng của bạn";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Giỏ hàng</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Giỏ hàng hiện đang trống. 
+            <a asp-controller="SanPham" asp-action="DanhSachSanPham">Tiếp tục mua sắm</a>
+        </div>
+    }
+    else
+    {
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Ảnh</th>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td style="width:100px">
+                            <img src="@item.HinhAnh" class="img-fluid" />
+                        </td>
+                        <td>@item.TenSanPham</td>
+                        <td>@item.DonGia.ToString("N0")₫</td>
+                        <td>@item.Quantity</td>
+                        <td class="fw-bold">
+                            @(item.Quantity * item.DonGia).ToString("N0")₫
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4" class="text-end">Tổng cộng:</th>
+                    <th class="fw-bold">
+                        @Model.Sum(x => x.Quantity * x.DonGia).ToString("N0")₫
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-end">
+            <a asp-controller="Checkout" asp-action="Index"
+               class="btn btn-success">
+                Tiến hành thanh toán
+            </a>
+        </div>
+    }
+</div>
