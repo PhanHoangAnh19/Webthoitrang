@@ -24,11 +24,9 @@ namespace WebBanDoThoiTrang.Controllers
             var sp = _db.SanPhams.Find(id);
             if (sp == null) return NotFound();
 
-            // Lấy giỏ hàng từ Session (hoặc tạo mới)
             var cart = HttpContext.Session.GetObject<List<GioHang>>(CART_KEY)
                        ?? new List<GioHang>();
 
-            // Kiểm tra tồn tại
             var item = cart.FirstOrDefault(c => c.MaSanPham == id);
             if (item == null)
             {
@@ -46,10 +44,7 @@ namespace WebBanDoThoiTrang.Controllers
                 item.Quantity++;
             }
 
-            // Lưu lại Session
             HttpContext.Session.SetObject(CART_KEY, cart);
-
-            // Chuyển sang GET để hiển thị giỏ hàng
             return RedirectToAction(nameof(ThemVaoGioHang));
         }
 
@@ -59,7 +54,39 @@ namespace WebBanDoThoiTrang.Controllers
         {
             var cart = HttpContext.Session.GetObject<List<GioHang>>(CART_KEY)
                        ?? new List<GioHang>();
-            return View(cart);    // sẽ render Views/GioHang/ThemVaoGioHang.cshtml
+            return View(cart);
+        }
+
+        // POST: /GioHang/CapNhat
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CapNhat(int productId, int quantity)
+        {
+            var cart = HttpContext.Session.GetObject<List<GioHang>>(CART_KEY)
+                       ?? new List<GioHang>();
+            var item = cart.FirstOrDefault(c => c.MaSanPham == productId);
+            if (item != null)
+            {
+                item.Quantity = quantity < 1 ? 1 : quantity;
+                HttpContext.Session.SetObject(CART_KEY, cart);
+            }
+            return RedirectToAction(nameof(ThemVaoGioHang));
+        }
+
+        // POST: /GioHang/Xoa
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Xoa(int productId)
+        {
+            var cart = HttpContext.Session.GetObject<List<GioHang>>(CART_KEY)
+                       ?? new List<GioHang>();
+            var item = cart.FirstOrDefault(c => c.MaSanPham == productId);
+            if (item != null)
+            {
+                cart.Remove(item);
+                HttpContext.Session.SetObject(CART_KEY, cart);
+            }
+            return RedirectToAction(nameof(ThemVaoGioHang));
         }
     }
 }

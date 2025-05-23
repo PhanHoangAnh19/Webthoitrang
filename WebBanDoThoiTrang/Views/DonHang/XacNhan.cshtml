@@ -1,0 +1,26 @@
+﻿@model WebBanDoThoiTrang.Models.DonHang
+@{
+    ViewData["Title"] = "Xác nhận đơn hàng";
+    Layout = "_Layout";
+}
+
+<div class="container py-5 text-center">
+    <h2>Đặt hàng thành công!</h2>
+    <p>Đơn hàng <strong>#@Model.MaDonHang</strong> của bạn đã được lưu.</p>
+    <p>Tổng tiền: <strong>@Model.TongTien.ToString("N0")₫</strong></p>
+
+    <ul class="list-group my-4">
+        @foreach (var ct in Model.ChiTietDonHangs)
+        {
+            <li class="list-group-item d-flex justify-content-between">
+                <span>@ct.SanPham.TenSanPham x @ct.SoLuong</span>
+                <span>@( (ct.DonGia * ct.SoLuong).ToString("N0") )₫</span>
+            </li>
+        }
+    </ul>
+
+    <a asp-controller="SanPham" asp-action="DanhSachSanPham"
+       class="btn btn-primary mt-3">
+        Tiếp tục mua sắm
+    </a>
+</div>

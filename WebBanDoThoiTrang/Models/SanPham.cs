@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace WebBanDoThoiTrang.Models
 {
     public class SanPham
     {
-        [Key]                      // ← Đánh dấu khoá chính
+        [Key]                    
         public int MaSanPham { get; set; }
 
         [Required, StringLength(150)]
@@ -22,7 +23,7 @@ namespace WebBanDoThoiTrang.Models
         [Required]
         public int SoLuongTon { get; set; }
 
-        // Navigation
+       
         public ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; }
     }
 }

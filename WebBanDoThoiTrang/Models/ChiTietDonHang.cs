@@ -1,26 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebBanDoThoiTrang.Models
 {
     public class ChiTietDonHang
     {
         [Key]
-        public int MaKhachHang { get; set; }
+        public int Id { get; set; }
 
-        [Required, StringLength(100)]
-        public string HoTen { get; set; }
+        // FK về DonHang
+        [Required]
+        public int DonHangId { get; set; }
+        public DonHang DonHang { get; set; }
 
-        [Required, EmailAddress, StringLength(150)]
-        public string Email { get; set; }
+        // FK về SanPham
+        [Required]
+        public int SanPhamId { get; set; }
+        public SanPham SanPham { get; set; }
 
-        [StringLength(20)]
-        public string DienThoai { get; set; }
+        // Số lượng và đơn giá tại thời điểm đặt
+        [Required]
+        public int SoLuong { get; set; }
 
-        [StringLength(255)]
-        public string DiaChi { get; set; }
-
-        // Navigation
-        public ICollection<DonHang> DonHangs { get; set; } = new List<DonHang>();
+        [Required, Column(TypeName = "decimal(18,2)")]
+        public decimal DonGia { get; set; }
     }
 }

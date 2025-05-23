@@ -1,48 +1,51 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography.Xml;
+using System;
 using System.Threading.Tasks;
-using WebBanDoThoiTrang.Models;
-using WebBanDoThoiTrang.ViewModels;
+using WebBanDoThoiTrang.Data;          // AppDbContext
+using WebBanDoThoiTrang.Models;        // Users, KhachHang
+using WebBanDoThoiTrang.ViewModels;    // RegisterViewModel, LoginViewModel, v.v.
 
 namespace WebBanDoThoiTrang.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<Users> signInManager;
-        private readonly UserManager<Users> userManager;
+        private readonly SignInManager<Users> _signInManager;
+        private readonly UserManager<Users> _userManager;
+        private readonly AppDbcontext _db;
 
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
+        public AccountController(
+            SignInManager<Users> signInManager,
+            UserManager<Users> userManager,
+            AppDbcontext db)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _db = db;
         }
 
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            if (!ModelState.IsValid)
+                return View(model);
 
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Email hoặc PassWord không đúng !");
-                    return View(model);
-                }
-            }
+            var result = await _signInManager
+                .PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            ModelState.AddModelError("", "Email hoặc mật khẩu không đúng!");
             return View(model);
         }
 
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
             return View();
         }
@@ -50,30 +53,38 @@ namespace WebBanDoThoiTrang.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // 1) Tạo user trong AspNetUsers
+            var user = new Users
             {
-                Users users = new Users
+                Fullname = model.Name,
+                Email = model.Email,
+                UserName = model.Email
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                // 2) Sau khi tạo Users thành công, tạo KhachHang
+                var kh = new KhachHang
                 {
-                    Fullname = model.Name,
+                    HoTen = model.Name,
                     Email = model.Email,
-                    UserName = model.Email,
+                    DienThoai = "",       
+                    DiaChi = ""
                 };
 
-                var result = await userManager.CreateAsync(users, model.Password);
+                _db.KhachHangs.Add(kh);
+                await _db.SaveChangesAsync();
 
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                    return View(model);
-                }
+                return RedirectToAction("Login", "Account");
             }
+
+            // Nếu có lỗi, show ra view
+            foreach (var error in result.Errors)
+                ModelState.AddModelError("", error.Description);
             return View(model);
         }
 
@@ -81,68 +92,66 @@ namespace WebBanDoThoiTrang.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> VerifyEmail(VerifyEmailViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user == null)
             {
-                var user = await userManager.FindByNameAsync(model.Email);
-                if (user == null)
-                {
-                    ModelState.AddModelError("", "Email không đúng!");
-                    return View(model);
-                }
-                else
-                {
-                    return RedirectToAction("ChangePassword", "Account", new { username = user.UserName });
-                }
+                ModelState.AddModelError("", "Email không tồn tại!");
+                return View(model);
             }
-            return View(model);
+
+            return RedirectToAction(
+                "ChangePassword",
+                "Account",
+                new { username = user.UserName }
+            );
         }
 
         public IActionResult ChangePassword(string username)
         {
             if (string.IsNullOrEmpty(username))
-            {
-                return RedirectToAction("VerifyEmail", "Account");
-            }
+                return RedirectToAction("VerifyEmail");
+
             return View(new ChangePassViewModel { Email = username });
         }
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePassViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = await userManager.FindByNameAsync(model.Email);
-                if (user != null)
-                {
-                    var result = await userManager.RemovePasswordAsync(user);
-                    if (result.Succeeded)
-                    {
-                        result = await userManager.AddPasswordAsync(user, model.NewPassword);
-                        return RedirectToAction("Login", "Account");
-                    }
-                    else
-                    {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                        return View(model);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Email không tồn tại!");
-                    return View(model);
-                }
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Có gì đó sai sai!");
                 return View(model);
             }
+
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Email không tồn tại!");
+                return View(model);
+            }
+
+            var removeResult = await _userManager.RemovePasswordAsync(user);
+            if (!removeResult.Succeeded)
+            {
+                foreach (var err in removeResult.Errors)
+                    ModelState.AddModelError("", err.Description);
+                return View(model);
+            }
+
+            var addResult = await _userManager.AddPasswordAsync(user, model.NewPassword);
+            if (addResult.Succeeded)
+                return RedirectToAction("Login");
+
+            foreach (var err in addResult.Errors)
+                ModelState.AddModelError("", err.Description);
+            return View(model);
         }
     }
 }

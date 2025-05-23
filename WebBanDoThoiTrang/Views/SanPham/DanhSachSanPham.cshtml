@@ -25,10 +25,10 @@
         {
             <div class="col">
                 <div class="card h-100 position-relative">
-                    @* Badge giảm giá cố định -0% *@
+                    
                     <div class="badge bg-danger position-absolute top-0 start-0 m-2">-0%</div>
 
-                    @* Nút yêu thích *@
+                    
                     <button class="btn position-absolute top-0 end-0 m-2 p-1 text-danger">
                         <i class="far fa-heart"></i>
                     </button>
@@ -47,7 +47,7 @@
                             </a>
                         </h6>
                         <div class="mt-auto">
-                            @* Hiển thị giá cũ nếu có *@
+                            
                             @if (sp.GiaCu.HasValue && sp.GiaCu.Value > sp.DonGia)
                             {
                                 <span class="text-muted text-decoration-line-through me-2">
@@ -58,7 +58,7 @@
                                 @sp.DonGia.ToString("N0")₫
                             </span>
 
-                            @* Nút Thêm vào giỏ hàng *@
+                            
                             <form asp-controller="GioHang"
                                   asp-action="ThemVaoGioHang"
                                   asp-route-id="@sp.MaSanPham"

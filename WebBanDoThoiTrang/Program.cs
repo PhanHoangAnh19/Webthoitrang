@@ -1,65 +1,74 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using System;
 using WebBanDoThoiTrang.Data;
 using WebBanDoThoiTrang.Models;
+using WebBanDoThoiTrang.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1) Đăng ký các service
 builder.Services.AddControllersWithViews();
 
+// DbContext
 builder.Services.AddDbContext<AppDbcontext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Configuration.GetConnectionString("Default");
- 
-builder.Services.AddIdentity<Users, IdentityRole>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Identity
+builder.Services.AddIdentity<Users, IdentityRole>(opts =>
 {
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-}) 
-    .AddEntityFrameworkStores<AppDbcontext>()
-    .AddDefaultTokenProviders();
-// add session store
+    opts.Password.RequireNonAlphanumeric = false;
+    opts.Password.RequiredLength = 8;
+    opts.Password.RequireUppercase = false;
+    opts.Password.RequireLowercase = false;
+    opts.User.RequireUniqueEmail = true;
+    opts.SignIn.RequireConfirmedAccount = false;
+    opts.SignIn.RequireConfirmedEmail = false;
+    opts.SignIn.RequireConfirmedPhoneNumber = false;
+})
+.AddEntityFrameworkStores<AppDbcontext>()
+.AddDefaultTokenProviders();
+
+// Session + CartService
 builder.Services.AddDistributedMemoryCache();
-
-
-builder.Services.AddSession(options =>
+builder.Services.AddSession(o =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(1);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    o.IdleTimeout = TimeSpan.FromHours(1);
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
 });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICartService, SessionCartService>();
 
 var app = builder.Build();
 
-
-if (!app.Environment.IsDevelopment())
+// 2) Middleware pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();   // show stacktrace
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseSession();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=SanPham}/{action=DanhSachSanPham}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=SanPham}/{action=DanhSachSanPham}/{id?}"
+);
 
 app.Run();
