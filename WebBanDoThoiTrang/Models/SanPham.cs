@@ -17,6 +17,8 @@ namespace WebBanDoThoiTrang.Models
         [Required]
         public decimal DonGia { get; set; }
 
+        public decimal? GiaCu { get; set; }
+        
         [Required]
         public int SoLuongTon { get; set; }
 

@@ -1,3 +1,4 @@
+
 namespace WebBanDoThoiTrang.Models
 {
     public class ErrorViewModel

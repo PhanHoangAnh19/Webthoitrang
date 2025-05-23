@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<Users> signInManager;
+﻿@using Microsoft.AspNetCore.Identity;;
+@using WebBanDoThoiTrang.Models
+@inject SignInManager<Users> signInManager
+@inject UserManager<Users> UserManager
 
     <ul class="navbar-nav ms-auto">
         @if (signInManager.IsSignedIn(User))

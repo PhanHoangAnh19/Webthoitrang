@@ -307,7 +307,6 @@ F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\9d2207punh-uhcwcohpr3.gz
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\ol82t1dfng-dnx7euk7t5.gz
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\w0el5y9xhc-fpx2jk561m.gz
-F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\fmo20ylmge-yfvo7rg7hw.gz
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\k1kv37ol49-61n19gt1b8.gz
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\a9v7ojo2en-xtxxf3hu2r.gz
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\9xx6dr2ngv-lwb0t8xlik.gz
@@ -383,3 +382,4 @@ F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\WebBanDoThoiTrang.pdb
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\WebBanDoThoiTrang.genruntimeconfig.cache
 F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\ref\WebBanDoThoiTrang.dll
+F:\C# thầy ĐỖ PHÚ HUY\WebBanDoThoiTrang_backup\WebBanDoThoiTrang\obj\Debug\net9.0\compressed\fmo20ylmge-kqic8f5sk0.gz

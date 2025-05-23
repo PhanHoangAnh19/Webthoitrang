@@ -15,7 +15,7 @@ namespace WebBanDoThoiTrang.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("DanhSachSanPham", "SanPham");
         }
 
         public IActionResult INNEW()
