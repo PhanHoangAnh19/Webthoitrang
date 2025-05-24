@@ -24,7 +24,7 @@ namespace WebBanDoThoiTrang.Controllers
         {
             var moiNhat = await _db.SanPhams
                                .OrderByDescending(s => s.MaSanPham)
-                               .Take(8)
+                               .Take(10)
                                .ToListAsync();
             return View(moiNhat);
         }
@@ -33,9 +33,19 @@ namespace WebBanDoThoiTrang.Controllers
         {
             var moiNhat = await _db.SanPhams
                                .OrderByDescending(s => s.MaSanPham)
-                               .Take(8)
+                               .Take(24)
                                .ToListAsync();
             return View(moiNhat);
+        }
+
+        public async Task<IActionResult> LookBook()
+        {
+            // Lấy tất cả sp có chứa "BoSuuTap" trong tên
+            var boSuuTap = await _db.SanPhams
+                .Where(sp => sp.TenSanPham.Contains("BoSuuTap"))
+                .ToListAsync();
+
+            return View(boSuuTap);
         }
 
         [HttpGet]
