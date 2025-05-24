@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using WebBanDoThoiTrang.Data;
 
 namespace WebBanDoThoiTrang.Controllers
@@ -12,11 +13,29 @@ namespace WebBanDoThoiTrang.Controllers
             _db = db;
         }
 
-        // Đây là action phải return kèm model để view không null
+       
         public IActionResult DanhSachSanPham()
         {
             var list = _db.SanPhams.ToList();
-            return View(list);   // ← CHÚ Ý: phải truyền list vào
+            return View(list);  
+        }
+
+        public async Task<IActionResult> InNew()
+        {
+            var moiNhat = await _db.SanPhams
+                               .OrderByDescending(s => s.MaSanPham)
+                               .Take(8)
+                               .ToListAsync();
+            return View(moiNhat);
+        }
+
+        public async Task<IActionResult> TongSP()
+        {
+            var moiNhat = await _db.SanPhams
+                               .OrderByDescending(s => s.MaSanPham)
+                               .Take(8)
+                               .ToListAsync();
+            return View(moiNhat);
         }
 
         [HttpGet]

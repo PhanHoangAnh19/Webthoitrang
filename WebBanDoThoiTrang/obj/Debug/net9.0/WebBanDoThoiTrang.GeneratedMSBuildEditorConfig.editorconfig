@@ -68,10 +68,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/INNEW.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJTk5FVy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Home/LOOKBOOK.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMT09LQk9PSy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -90,6 +86,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/SanPham/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/SanPham/InNew.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbVxJbk5ldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/SanPham/TongSP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FuUGhhbVxUb25nU1AuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/C\# thầy ĐỖ PHÚ HUY/WebBanDoThoiTrang_backup/WebBanDoThoiTrang/Views/Shared/Error.cshtml]

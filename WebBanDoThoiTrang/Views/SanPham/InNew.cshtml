@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebBanDoThoiTrang.Models.SanPham>
+@{
+    ViewData["Title"] = "Sản Phẩm Mới Nhất";
+    Layout = "_Layout";
+}
+
+<div class="my-slider mb-8 relative w-full overflow-hidden">
+    <button class="my-slider__btn prev absolute top-1/2 left-4 transform -translate-y-1/2 z-20">&lsaquo;</button>
+    <div class="my-slider__viewport w-full h-64 overflow-hidden">
+        <div class="my-slider__track flex transition-transform duration-500 ease">
+            <img src="~/images/slide3.png" alt="Slide 1" class="w-full flex-shrink-0 object-cover" />
+            <img src="~/images/slide4.png" alt="Slide 2" class="w-full flex-shrink-0 object-cover" />
+        </div>
+    </div>
+    <button class="my-slider__btn next absolute top-1/2 right-4 transform -translate-y-1/2 z-20">&rsaquo;</button>
+</div>
+
+<h1>SẢN PHẨM MỚI NHẤT</h1>
+<section class="container py-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @foreach (var sp in Model)
+        {
+            <div class="col">
+                <div class="card h-100 position-relative">
+                    
+                    <div class="badge bg-danger position-absolute top-0 start-0 m-2">-0%</div>
+
+                    <button class="btn position-absolute top-0 end-0 m-2 p-1 text-danger">
+                        <i class="far fa-heart"></i>
+                    </button>
+
+                    <a asp-action="Details" asp-route-id="@sp.MaSanPham">
+                        <img src="@sp.HinhAnh"
+                             class="card-img-top img-fluid"
+                             alt="@sp.TenSanPham" />
+                    </a>
+
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title mb-2">
+                            <a asp-action="Details" asp-route-id="@sp.MaSanPham"
+                               class="text-decoration-none text-dark">
+                                @sp.TenSanPham
+                            </a>
+                        </h6>
+                        <div class="mt-auto">
+                            @if (sp.GiaCu.HasValue && sp.GiaCu.Value > sp.DonGia)
+                            {
+                                <span class="text-muted text-decoration-line-through me-2">
+                                    @sp.GiaCu.Value.ToString("N0")₫
+                                </span>
+                            }
+                            <span class="fw-bold text-danger">
+                                @sp.DonGia.ToString("N0")₫
+                            </span>
+
+                            <form asp-controller="GioHang"
+                                  asp-action="ThemVaoGioHang"
+                                  asp-route-id="@sp.MaSanPham"
+                                  method="post"
+                                  class="mt-3">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-cart-plus me-1"></i> Thêm vào giỏ
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
