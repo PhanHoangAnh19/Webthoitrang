@@ -5,70 +5,69 @@ using System;
 using WebBanDoThoiTrang.Data;
 using WebBanDoThoiTrang.Models;
 using WebBanDoThoiTrang.Services;
+using WebBanDoThoiTrang.Helpers;  
+using System.Collections.Generic;
+
 
 namespace WebBanDoThoiTrang.Controllers
 {
     public class DonHangController : Controller
     {
         private readonly AppDbcontext _db;
-        private readonly ICartService _cartSvc;
         private readonly UserManager<Users> _userManager;
 
-        public DonHangController(
-            AppDbcontext db,
-            ICartService cartSvc,
-            UserManager<Users> userManager)
+        public DonHangController(AppDbcontext db,UserManager<Users> userManager)
         {
             _db = db;
-            _cartSvc = cartSvc;
             _userManager = userManager;
         }
 
-        
+
 
 
         // POST /DonHang/ThanhToanConfirmed
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> ThanhToanConfirmed()
         {
-            var cart = _cartSvc.GetCart();
-            if (!cart.Items.Any())
+            const string CART_KEY = "CART_SESSION";
+
+            // 1) Lấy giỏ từ session (List<GioHang>)
+            var cart = HttpContext.Session.GetObject<List<GioHang>>(CART_KEY)
+                       ?? new List<GioHang>();
+            if (!cart.Any())
                 return RedirectToAction("DanhSachSanPham", "SanPham");
 
-            // 1) Lấy user Identity
+            // 2) Lấy user Identity
             var identityUser = await _userManager.GetUserAsync(User);
             if (identityUser == null)
-                return Challenge();    // yêu cầu login
+                return Challenge();
 
-            // 2) Tìm KhachHang theo email
+            // 3) Tìm Khách hàng
             var kh = await _db.KhachHangs
                               .FirstOrDefaultAsync(x => x.Email == identityUser.Email);
             if (kh == null)
                 return BadRequest("Không tìm thấy thông tin khách hàng.");
 
-            // 3) Tạo đơn hàng mới
+            // 4) Tạo DonHang
             var dh = new DonHang
             {
                 MaKhachHang = kh.MaKhachHang,
                 NgayDatHang = DateTime.Now,
-                TongTien = cart.Total,
-                ChiTietDonHangs = cart.Items
-                    .Select(i => new ChiTietDonHang
-                    {
-                        SanPhamId = i.MaSanPham,
-                        SoLuong = i.Quantity,
-                        DonGia = i.DonGia
-                    })
-                    .ToList()
+                TongTien = cart.Sum(i => i.DonGia * i.Quantity),
+                ChiTietDonHangs = cart.Select(i => new ChiTietDonHang
+                {
+                    SanPhamId = i.MaSanPham,
+                    SoLuong = i.Quantity,
+                    DonGia = i.DonGia
+                }).ToList()
             };
-
             _db.DonHangs.Add(dh);
             await _db.SaveChangesAsync();
 
-            // 4) Clear giỏ
-            _cartSvc.Clear();
+            // 5) Xóa session giỏ hàng
+            HttpContext.Session.Remove(CART_KEY);
 
-            // 5) Redirect tới trang xác nhận
+            // 6) Chuyển sang xác nhận
             return RedirectToAction("XacNhan", new { id = dh.MaDonHang });
         }
 

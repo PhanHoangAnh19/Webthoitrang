@@ -97,14 +97,15 @@
      class="btn btn-secondary">
     ← Tiếp tục mua sắm
   </a>
-  <form asp-controller="DonHang"
+ <form asp-controller="DonHang"
       asp-action="ThanhToanConfirmed"
-      method="post" class="d-inline">
+      method="post">
   @Html.AntiForgeryToken()
   <button type="submit" class="btn btn-success btn-lg">
     Thanh toán
   </button>
 </form>
+
 </div>
     }
 </div>

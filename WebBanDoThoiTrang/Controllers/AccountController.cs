@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
-using WebBanDoThoiTrang.Data;          // AppDbContext
-using WebBanDoThoiTrang.Models;        // Users, KhachHang
-using WebBanDoThoiTrang.ViewModels;    // RegisterViewModel, LoginViewModel, v.v.
+using WebBanDoThoiTrang.Data;       
+using WebBanDoThoiTrang.Models;    
+using WebBanDoThoiTrang.ViewModels; 
 
 namespace WebBanDoThoiTrang.Controllers
 {
@@ -12,12 +11,9 @@ namespace WebBanDoThoiTrang.Controllers
     {
         private readonly SignInManager<Users> _signInManager;
         private readonly UserManager<Users> _userManager;
-        private readonly AppDbcontext _db;
+        private readonly AppDbcontext _db;    
 
-        public AccountController(
-            SignInManager<Users> signInManager,
-            UserManager<Users> userManager,
-            AppDbcontext db)
+        public AccountController(SignInManager<Users> signInManager,UserManager<Users> userManager,AppDbcontext db)               
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -56,7 +52,7 @@ namespace WebBanDoThoiTrang.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // 1) Tạo user trong AspNetUsers
+          
             var user = new Users
             {
                 Fullname = model.Name,
@@ -67,22 +63,20 @@ namespace WebBanDoThoiTrang.Controllers
 
             if (result.Succeeded)
             {
-                // 2) Sau khi tạo Users thành công, tạo KhachHang
+                
                 var kh = new KhachHang
                 {
                     HoTen = model.Name,
                     Email = model.Email,
-                    DienThoai = "",       
-                    DiaChi = ""
+                    DienThoai = "",  
+                    DiaChi = ""   
                 };
-
                 _db.KhachHangs.Add(kh);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction("Login", "Account");
             }
 
-            // Nếu có lỗi, show ra view
             foreach (var error in result.Errors)
                 ModelState.AddModelError("", error.Description);
             return View(model);
